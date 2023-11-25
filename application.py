@@ -3,6 +3,10 @@ import datetime
 from mysql.connector import Error
 from flask import Flask, request, jsonify, render_template,redirect, url_for
 from random import randint
+# from dotenv import load_dotenv
+from urllib.parse import urlparse
+# import os
+# load_dotenv()
 
 
 app = Flask(__name__)
@@ -110,11 +114,13 @@ def renderParticipants():
 
     return render_template('participants.html',events = events)
 
+# app.config["DATABASE_URL"] = os.getenv("DATABASE_URL")
+
+DATABASE_URL = "postgresql://dbms_mini_project_user:1Vcx3u68RaB9klxSM8IihcmbIUmtZuem@dpg-clgieqef27hc739kr2og-a.oregon-postgres.render.com/dbms_mini_project"
 def runQuery(query):
 
     try:
         db = mysql.connector.connect( host='localhost',database='eventman',user='root',password='Amitesh18@')  #'password '
-
         if db.is_connected():
             print("Connected to MySQL, running query: ", query)
             cursor = db.cursor(buffered = True)
